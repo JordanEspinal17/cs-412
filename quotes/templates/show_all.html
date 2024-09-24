@@ -3,7 +3,7 @@
 {% block content %}
 <h2>All Quotes</h2>
 <ul>
-    {% for quote, image in zip(quotes, images) %}
+    {% for quote, image in quotes_and_images %}
     <li>
         <img src="{{ image }}" alt="{{ quote }}">
         <p>{{ quote }}</p>
