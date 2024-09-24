@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}  <!-- Load the static tag library -->
 
 {% block content %}
 <h2>Random Quote</h2>
-<img src="{{ image }}" alt="{{ quote }}">
+<img src="{% static image %}" alt="Quote Image" />
 <p>{{ quote }}</p>
 {% endblock content %}

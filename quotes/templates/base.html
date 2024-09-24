@@ -1,10 +1,10 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Quotes App</title>
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-    </head>
+<head>
+    <title>Quotes App</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
 <body>
     <header>
         <h1>Quotes App</h1>
@@ -19,6 +19,9 @@
 
     <main>
         {% block content %}
+        <h2>Random Quote</h2>
+            <img src="{{ image }}" alt="Quote Image" />
+            <p>{{ quote }}</p>
         {% endblock content %}
     </main>
 

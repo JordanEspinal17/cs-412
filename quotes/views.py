@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import random
 from typing import Dict, Any
+from django.urls import reverse
 
 # Define Quotes and Images Lists (Global Scope)
 quotes = [
@@ -10,25 +11,21 @@ quotes = [
 ]
 
 images = [
-    "https://www.google.com/imgres?q=kendrick%20lamar%20photos&imgurl=https%3A%2F%2Fakns-images.eonline.com%2Feol_images%2FEntire_Site%2F202488%2Frs_1200x1200-240908095312-1200-kendrick-lamar-super-bowl-2025-cjh-090824.jpg%3Ffit%3Daround%257C660%3A372%26output-quality%3D90%26crop%3D660%3A372%3Bcenter%2Ctop&imgrefurl=https%3A%2F%2Fwww.eonline.com%2Fnews%2Fkendrick_lamar&docid=TMJSml3A65OpCM&tbnid=PEJYMPYb62V4DM&vet=12ahUKEwi61IOP4NuIAxVmD1kFHVbHEq8QM3oECG8QAA..i&w=660&h=372&hcb=2&ved=2ahUKEwi61IOP4NuIAxVmD1kFHVbHEq8QM3oECG8QAA",
-    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fopen.spotify.com%2Fartist%2F2YZyLoL8N0Wb9xBt1NhZWg&psig=AOvVaw2gabS-u_0SABHU5RHdSRH4&ust=1727273171077000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMjThrvg24gDFQAAAAAdAAAAABAE",
-    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fnypost.com%2F2022%2F05%2F13%2Fwhy-kendrick-lamar-is-the-greatest-rapper-of-his-generation%2F&psig=AOvVaw2gabS-u_0SABHU5RHdSRH4&ust=1727273171077000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCMjThrvg24gDFQAAAAAdAAAAABAJ"
+    "https://www.google.com/imgres?q=kendrick%20lamar%20photos%20good%20quality&imgurl=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fkendrick-lamar-close-up-photography-v6h66gs4en54vd2k.jpg&imgrefurl=https%3A%2F%2Fwallpapers.com%2Fkendrick-lamar-pictures&docid=WoJuv_GFNeTxXM&tbnid=2kMtJIfNGWBoyM&vet=12ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECBgQAA..i&w=1920&h=1280&hcb=2&ved=2ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECBgQAA",
+    "https://www.google.com/imgres?q=kendrick%20lamar%20photos%20good%20quality&imgurl=https%3A%2F%2Fwww.hotnewhiphop.com%2Fimages%2Fv2%2F2024%2F04%2Fkendrick-lamar-good-kid-maad-city-scaled.jpg&imgrefurl=https%3A%2F%2Fpartnersco.me%2Fdeabgcvshop%2F795087-kendrick-lamar-good-kid-maad-city-milestone-hip-hop-news&docid=GIyD_XuzgXdgtM&tbnid=LwmHU6IyM8E4qM&vet=12ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECDgQAA..i&w=2560&h=1707&hcb=2&itg=1&ved=2ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECDgQAA",
+    "https://www.google.com/imgres?q=kendrick%20lamar%20photos%20good%20quality&imgurl=https%3A%2F%2Ffootwearnews.com%2Fwp-content%2Fuploads%2F2022%2F04%2Fkendrick-lamar.jpg&imgrefurl=https%3A%2F%2Ffootwearnews.com%2Ffashion%2Fcelebrity-style%2Fkendrick-lamar-paris-crochet-vest-parachute-pants-1203360576%2F&docid=ou__l4g-3wELRM&tbnid=E1gYL_YZ-yYHSM&vet=12ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECCMQAA..i&w=1024&h=697&hcb=2&ved=2ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECCMQAA"
 ]
+
 
 # Views for the quotes app
 
 def get_random_quote_and_image() -> Dict[str, Any]:
-    """
-    Selects a random quote and its corresponding image.
-
-    Returns:
-        A dictionary containing a random quote and image.
-    """
     index = random.randint(0, len(quotes) - 1)
     return {
         'quote': quotes[index],
         'image': images[index],
     }
+
 
 def quote(request) -> render:
     """

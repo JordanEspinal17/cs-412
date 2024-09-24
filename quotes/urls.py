@@ -6,4 +6,5 @@ urlpatterns = [
     path('quote/', views.quote, name='get_random_quote'),
     path('show_all/', views.show_all, name='show_all_quotes'),
     path('about/', views.about, name='about'),
+    
 ]
