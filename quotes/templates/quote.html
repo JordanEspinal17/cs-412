@@ -3,6 +3,6 @@
 
 {% block content %}
 <h2>Random Quote</h2>
-<img src="{% static image %}" alt="Quote Image" />
+<img src="{{ image }}" alt="Random Quote Image">
 <p>{{ quote }}</p>
 {% endblock content %}

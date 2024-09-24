@@ -1,7 +1,9 @@
 from django.shortcuts import render
 import random
 from typing import Dict, Any
-from django.urls import reverse
+from django.http import HttpResponse
+from django.templatetags.static import static
+
 
 # Define Quotes and Images Lists (Global Scope)
 quotes = [
@@ -11,47 +13,49 @@ quotes = [
 ]
 
 images = [
-    "https://www.google.com/imgres?q=kendrick%20lamar%20photos%20good%20quality&imgurl=https%3A%2F%2Fwallpapers.com%2Fimages%2Fhd%2Fkendrick-lamar-close-up-photography-v6h66gs4en54vd2k.jpg&imgrefurl=https%3A%2F%2Fwallpapers.com%2Fkendrick-lamar-pictures&docid=WoJuv_GFNeTxXM&tbnid=2kMtJIfNGWBoyM&vet=12ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECBgQAA..i&w=1920&h=1280&hcb=2&ved=2ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECBgQAA",
-    "https://www.google.com/imgres?q=kendrick%20lamar%20photos%20good%20quality&imgurl=https%3A%2F%2Fwww.hotnewhiphop.com%2Fimages%2Fv2%2F2024%2F04%2Fkendrick-lamar-good-kid-maad-city-scaled.jpg&imgrefurl=https%3A%2F%2Fpartnersco.me%2Fdeabgcvshop%2F795087-kendrick-lamar-good-kid-maad-city-milestone-hip-hop-news&docid=GIyD_XuzgXdgtM&tbnid=LwmHU6IyM8E4qM&vet=12ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECDgQAA..i&w=2560&h=1707&hcb=2&itg=1&ved=2ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECDgQAA",
-    "https://www.google.com/imgres?q=kendrick%20lamar%20photos%20good%20quality&imgurl=https%3A%2F%2Ffootwearnews.com%2Fwp-content%2Fuploads%2F2022%2F04%2Fkendrick-lamar.jpg&imgrefurl=https%3A%2F%2Ffootwearnews.com%2Ffashion%2Fcelebrity-style%2Fkendrick-lamar-paris-crochet-vest-parachute-pants-1203360576%2F&docid=ou__l4g-3wELRM&tbnid=E1gYL_YZ-yYHSM&vet=12ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECCMQAA..i&w=1024&h=697&hcb=2&ved=2ahUKEwjSt8jqh9yIAxWbGFkFHXnQLBsQM3oECCMQAA"
+    static('images/kendrick_lamar1.jpg'),  # Add correct filenames for your static images
+    static('images/kendrick_lamar2.jpg'),
+    static('images/kendrick_lamar3.jpg')
 ]
 
+def show_all(request):
+    # Zip quotes and images into a list of tuples
+    quotes_images = zip(quotes, images)
+    context = {
+        'quotes_images': quotes_images
+    }
+    return render(request, 'show_all.html', context)
+# ... rest of your code ...
 
 # Views for the quotes app
-
 def get_random_quote_and_image() -> Dict[str, Any]:
+    """
+    This function returns a random quote and its corresponding image.
+    """
     index = random.randint(0, len(quotes) - 1)
     return {
         'quote': quotes[index],
-        'image': images[index],
+        'image': images[index],  # The image path is already processed by static()
     }
 
-
-def quote(request) -> render:
+def quote(request) -> HttpResponse:
     """
     This view displays a random quote and image.
     """
     context = get_random_quote_and_image()
     return render(request, 'quote.html', context)
 
-def show_all(request) -> render:
-    """
-    This view displays all quotes and images.
-    """
-    context = {
-        'quotes': quotes,
-        'images': images,
-    }
-    return render(request, 'show_all.html', context)
+# In views.py
 
-def about(request) -> render:
+
+def about(request) -> HttpResponse:
     """
     This view displays the about page.
     """
     about_text = (
-        "This application displays quotes from [Famous Person Name]. "
-        "[Famous Person Name] was [Brief Biography]. "
-        "This application was created by [Your Name]."
+        "This application displays quotes from Kendrick Lamar. "
+        "Kendrick Lamar is a renowned American rapper and songwriter. "
+        "This application was created by Jordan Espinal."
     )
 
     context = {

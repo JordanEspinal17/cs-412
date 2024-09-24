@@ -3,7 +3,8 @@
 <html>
 <head>
     <title>Quotes App</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+<!-- In your base.html or main template -->
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
     <header>
@@ -19,9 +20,11 @@
 
     <main>
         {% block content %}
-        <h2>Random Quote</h2>
-            <img src="{{ image }}" alt="Quote Image" />
-            <p>{{ quote }}</p>
+        <!-- In your Django template, for example, quotes.html -->
+{% for image in images %}
+<img src="{% static quote.image %}" alt="Kendrick Lamar" style="max-width: 100%; height: auto;">
+{% endfor %}
+
         {% endblock content %}
     </main>
 
