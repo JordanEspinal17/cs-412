@@ -19,15 +19,15 @@ images = [
 ]
 
 def show_all(request):
-    # Zip quotes and images into a list of tuples
+    """
+    This view displays all quotes and their corresponding images.
+    """
     quotes_images = zip(quotes, images)
     context = {
         'quotes_images': quotes_images
     }
     return render(request, 'show_all.html', context)
-# ... rest of your code ...
 
-# Views for the quotes app
 def get_random_quote_and_image() -> Dict[str, Any]:
     """
     This function returns a random quote and its corresponding image.
@@ -35,7 +35,7 @@ def get_random_quote_and_image() -> Dict[str, Any]:
     index = random.randint(0, len(quotes) - 1)
     return {
         'quote': quotes[index],
-        'image': images[index],  # The image path is already processed by static()
+        'image': images[index],  # Pass the image path directly
     }
 
 def quote(request) -> HttpResponse:
@@ -45,9 +45,6 @@ def quote(request) -> HttpResponse:
     context = get_random_quote_and_image()
     return render(request, 'quote.html', context)
 
-# In views.py
-
-
 def about(request) -> HttpResponse:
     """
     This view displays the about page.
@@ -55,9 +52,8 @@ def about(request) -> HttpResponse:
     about_text = (
         "This application displays quotes from Kendrick Lamar. "
         "Kendrick Lamar is a renowned American rapper and songwriter. "
-        "This application was created by Jordan Espinal."
+        "This application was created by [Your Name]."
     )
-
     context = {
         'about_text': about_text,
     }
