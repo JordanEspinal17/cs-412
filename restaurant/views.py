@@ -22,7 +22,7 @@ def main(request):
             'images/empanadas.jpg',
         ],
     }
-    return render(request, 'main.html', context)
+    return render(request, 'restaurant/main.html', context)
 
 
 def order(request):
@@ -36,7 +36,7 @@ def order(request):
         'daily_special': daily_special
     }
     
-    return render(request, 'order.html', context)
+    return render(request, 'restaurant/order.html', context)
 
 
 def confirmation(request):
@@ -83,7 +83,7 @@ def confirmation(request):
             'ready_time': ready_time,
         }
 
-        return render(request, 'confirmation.html', context)
+        return render(request, 'restaurant/confirmation.html', context)
     else:
         # Redirect to the order page if accessed directly
-        return redirect('order')
+        return redirect('restaurant/order')
