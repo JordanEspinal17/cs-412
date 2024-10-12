@@ -132,10 +132,10 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT =  os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Main static directory for CSS and JS
+    os.path.join(BASE_DIR,'mini_fb/static'),
+    #os.path.join(BASE_DIR, 'static'),  # Main static directory for CSS and JS
     #os.path.join(BASE_DIR, 'quotes', 'static'),  # Quotes app static files
     os.path.join(BASE_DIR, 'restaurant/static'),
-    os.path.join(BASE_DIR,'mini_fb/static'),
 ]
 
 # Default primary key field type

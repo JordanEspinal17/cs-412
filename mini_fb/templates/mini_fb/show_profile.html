@@ -1,0 +1,21 @@
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+<h2>{{ profile.first_name }} {{ profile.last_name }}</h2>
+
+<p>City: {{ profile.city }}</p>
+<p>Email: {{ profile.email }}</p>
+
+<h3>Status Messages:</h3>
+<ul>
+    {% for status in profile.get_status_messages %}
+        <li>{{ status.timestamp|date:"Y-m-d H:i" }}: {{ status.message }}</li>
+    {% empty %}
+        <li>No status messages available.</li>
+    {% endfor %}
+</ul>
+
+<!-- Link to create a new status message -->
+<a href="{% url 'create_status' profile.pk %}">Post a Status Message</a>
+
+{% endblock %}

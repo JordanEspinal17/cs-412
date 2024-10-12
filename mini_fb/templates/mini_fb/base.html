@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {% load static %}
     <title>Mini Facebook</title>
-    <link rel="stylesheet" href="{% static 'mini_fb/style.css' %}">
-
+    {% load static %}
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{% static 'mini_fb/mini_fb_styles.css' %}">
 </head>
 <body>
     <header>
         <h1>Mini Facebook</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'show_all_profiles' %}">All Profiles</a></li>
+                <li><a href="{% url 'create_profile' %}">Create New Profile</a></li>
+            </ul>
+        </nav>
     </header>
+
     <main>
-        {% block content %}{% endblock %}
+        {% block content %}
+        {% endblock %}
     </main>
+
     <footer>
         <p>&copy; 2024 Mini Facebook</p>
     </footer>
