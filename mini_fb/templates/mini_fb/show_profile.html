@@ -9,7 +9,18 @@
 <h3>Status Messages:</h3>
 <ul>
     {% for status in profile.get_status_messages %}
-        <li>{{ status.timestamp|date:"Y-m-d H:i" }}: {{ status.message }}</li>
+        <li>
+            {{ status.timestamp|date:"Y-m-d H:i" }}: {{ status.message }}
+            
+            <!-- Check if the status message has any images -->
+            {% if status.get_images %}
+                <div class="status-images">
+                    {% for img in status.get_images %}
+                        <img src="{{ img.image_file.url }}" alt="Image for status {{ status.id }}" style="max-width: 300px; max-height: 300px;">
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </li>
     {% empty %}
         <li>No status messages available.</li>
     {% endfor %}
