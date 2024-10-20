@@ -1,9 +1,11 @@
-from django.views.generic import ListView, DetailView,CreateView
+from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
 from .models import Profile, StatusMessage, Image
-from .forms import CreateProfileForm, CreateStatusMessageForm
-from django.urls import reverse
+from .forms import CreateProfileForm, CreateStatusMessageForm,UpdateStatusMessageForm  
+from django.urls import reverse,reverse_lazy
 from django.views.generic.edit import CreateView
 from django.shortcuts import get_object_or_404, redirect
+from .forms import UpdateProfileForm
+
 
 
 class ShowAllProfilesView(ListView):
@@ -56,3 +58,32 @@ class CreateStatusMessageView(CreateView):
         profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
         context['profile'] = profile
         return context
+
+class UpdateProfileView(UpdateView):
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = 'mini_fb/update_profile_form.html'
+
+    def get_success_url(self):
+        return reverse_lazy('show_profile', kwargs={'pk': self.object.pk})
+    
+class DeleteStatusMessageView(DeleteView):
+    model = StatusMessage
+    template_name = 'mini_fb/delete_status_form.html'
+    context_object_name = 'status_message'
+
+    def get_success_url(self):
+        # Redirect to the profile page of the user who owns the status message
+        profile_id = self.object.profile.pk
+        return reverse_lazy('show_profile', kwargs={'pk': profile_id})
+    
+class UpdateStatusMessageView(UpdateView):
+    model = StatusMessage
+    form_class = UpdateStatusMessageForm
+    template_name = 'mini_fb/update_status_form.html'
+    context_object_name = 'status_message'
+
+    def get_success_url(self):
+        # Redirect to the profile page of the user who owns the status message
+        profile_id = self.object.profile.pk
+        return reverse_lazy('show_profile', kwargs={'pk': profile_id})

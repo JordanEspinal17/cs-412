@@ -1,3 +1,5 @@
+<!-- mini_fb/templates/mini_fb/show_profile.html -->
+
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
@@ -6,13 +8,16 @@
 <p>City: {{ profile.city }}</p>
 <p>Email: {{ profile.email }}</p>
 
+<!-- Add the Update Profile link -->
+<p><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></p>
+
 <h3>Status Messages:</h3>
 <ul>
     {% for status in profile.get_status_messages %}
         <li>
             {{ status.timestamp|date:"Y-m-d H:i" }}: {{ status.message }}
             
-            <!-- Check if the status message has any images -->
+            <!-- Display images if any -->
             {% if status.get_images %}
                 <div class="status-images">
                     {% for img in status.get_images %}
@@ -20,6 +25,12 @@
                     {% endfor %}
                 </div>
             {% endif %}
+
+            <!-- Add update and delete links -->
+            <p>
+                <a href="{% url 'update_status' status.pk %}">Update</a> |
+                <a href="{% url 'delete_status' status.pk %}">Delete</a>
+            </p>
         </li>
     {% empty %}
         <li>No status messages available.</li>
@@ -27,6 +38,6 @@
 </ul>
 
 <!-- Link to create a new status message -->
-<a href="{% url 'create_status' profile.pk %}">Post a Status Message</a>
+<p><a href="{% url 'create_status' profile.pk %}">Post a Status Message</a></p>
 
 {% endblock %}

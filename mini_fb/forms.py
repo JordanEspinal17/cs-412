@@ -12,3 +12,15 @@ class CreateStatusMessageForm(forms.ModelForm):
     class Meta:
         model = StatusMessage
         fields = ['message']  # Only the message will be input by the user
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        # Exclude 'first_name' and 'last_name' from the form
+        fields = ['city', 'email', 'profile_image_url']
+
+class UpdateStatusMessageForm(forms.ModelForm):
+    class Meta:
+        model = StatusMessage
+        fields = ['message']
+
