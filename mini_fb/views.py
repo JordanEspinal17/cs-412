@@ -1,4 +1,4 @@
-from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView
+from django.views.generic import ListView, DetailView,CreateView,UpdateView,DeleteView, View
 from .models import Profile, StatusMessage, Image
 from .forms import CreateProfileForm, CreateStatusMessageForm,UpdateStatusMessageForm  
 from django.urls import reverse,reverse_lazy
@@ -87,3 +87,29 @@ class UpdateStatusMessageView(UpdateView):
         # Redirect to the profile page of the user who owns the status message
         profile_id = self.object.profile.pk
         return reverse_lazy('show_profile', kwargs={'pk': profile_id})
+    
+class CreateFriendView(View):
+    def dispatch(self, request, *args, **kwargs):
+        profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
+        other_profile = get_object_or_404(Profile, pk=self.kwargs['other_pk'])
+        profile.add_friend(other_profile)
+        return redirect('show_profile', pk=profile.pk)
+    
+class ShowFriendSuggestionsView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['friend_suggestions'] = self.object.get_friend_suggestions()
+        return context
+    
+class ShowNewsFeedView(DetailView):
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add the news feed to the context using the get_news_feed method
+        context['news_feed'] = self.object.get_news_feed()
+        return context

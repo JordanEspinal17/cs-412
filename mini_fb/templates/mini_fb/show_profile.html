@@ -11,6 +11,21 @@
 <!-- Add the Update Profile link -->
 <p><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></p>
 
+<h3>Friends:</h3>
+<ul>
+    {% if profile.get_friends %}
+        {% for friend in profile.get_friends %}
+            <li>
+                <a href="{% url 'show_profile' friend.pk %}">
+                    {{ friend.first_name }} {{ friend.last_name }}
+                </a>
+            </li>
+        {% endfor %}
+    {% else %}
+        <li>No friends yet.</li>
+    {% endif %}
+</ul>
+
 <h3>Status Messages:</h3>
 <ul>
     {% for status in profile.get_status_messages %}
@@ -39,5 +54,13 @@
 
 <!-- Link to create a new status message -->
 <p><a href="{% url 'create_status' profile.pk %}">Post a Status Message</a></p>
+
+<!-- Inside mini_fb/templates/mini_fb/show_profile.html -->
+
+<p><a href="{% url 'friend_suggestions' profile.pk %}">View Friend Suggestions</a></p>
+
+<!-- mini_fb/templates/mini_fb/show_profile.html -->
+
+<p><a href="{% url 'news_feed' profile.pk %}">View News Feed</a></p>
 
 {% endblock %}
