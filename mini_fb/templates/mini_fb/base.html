@@ -11,8 +11,32 @@
         <h1>Mini Facebook</h1>
         <nav>
             <ul>
-                <li><a href="{% url 'show_all_profiles' %}">All Profiles</a></li>
-                <li><a href="{% url 'create_profile' %}">Create New Profile</a></li>
+                <li><a href="{% url 'mini_fb:show_all_profiles' %}">All Profiles</a></li>
+
+                {% if user.is_authenticated %}
+                    <li>Welcome, {{ user.username }}!</li>
+                    {% if user.profile %}
+                    <li><a href="{% url 'mini_fb:show_profile' user.profile.id %}">My Profile</a></li>
+
+                    {% else %}
+                    <li><a href="{% url 'mini_fb:register' %}">Register</a></li>
+                    <li><a href="{% url 'mini_fb:login' %}">Login</a></li>
+
+                        <li><form method="post" action="{% url 'mini_fb:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form></li>
+                    
+                    {% endif %}
+                    
+
+
+                {% else %}
+                    <li><a href="{% url 'mini_fb:login' %}">Login</a></li>
+
+
+                {% endif %}
+
             </ul>
         </nav>
     </header>

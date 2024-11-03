@@ -5,21 +5,11 @@
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <label for="id_message">Message:</label>
-    <input type="text" name="message" id="id_message" required>
-
-    <br><br>
-
-    <!-- File upload field -->
-    <label for="id_files">Upload Images:</label>
-    <input type="file" name="files" id="id_files" multiple>
-
-    <br><br>
-
+    {{ form.as_p }}
     <button type="submit">Post Status</button>
 </form>
 
 <!-- Link back to the profile page -->
-<a href="{% url 'show_profile' profile.pk %}">Back to Profile</a>
+<a href="{% url 'mini_fb:show_profile' profile.pk %}">Back to Profile</a>
 
 {% endblock %}

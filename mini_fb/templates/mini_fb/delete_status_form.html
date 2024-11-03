@@ -13,7 +13,7 @@
 </form>
 
 <!-- Form to cancel deletion -->
-<form method="get" action="{% url 'show_profile' status_message.profile.pk %}">
+<form method="get" action="{% url 'mini_fb:show_profile' status_message.profile.pk %}">
     <button type="submit">Cancel</button>
 </form>
 {% endblock %}

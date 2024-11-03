@@ -9,13 +9,13 @@
     {% for suggestion in friend_suggestions %}
         <li>
             {{ suggestion.first_name }} {{ suggestion.last_name }}
-            <a href="{% url 'add_friend' profile.pk suggestion.pk %}">Add Friend</a>
+            <a href="{% url 'mini_fb:add_friend' profile.pk suggestion.pk %}">Add Friend</a>
         </li>
     {% empty %}
         <li>No friend suggestions available.</li>
     {% endfor %}
 </ul>
 
-<p><a href="{% url 'show_profile' profile.pk %}">Back to Profile</a></p>
+<p><a href="{% url 'mini_fb:show_profile' profile.pk %}">Back to Profile</a></p>
 
 {% endblock %}

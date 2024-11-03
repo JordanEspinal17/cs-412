@@ -1,9 +1,12 @@
 from django.db import models
 from django.utils import timezone
 from django.db.models import Q
+from django.contrib.auth.models import User  # Import User model
+
 
 
 class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='profile')
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     city = models.CharField(max_length=50)
@@ -11,7 +14,8 @@ class Profile(models.Model):
     profile_image_url = models.URLField()
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name} ({self.user.username if self.user else 'No User'})"
+
 
     def get_status_messages(self):
         return self.statusmessage_set.all().order_by('-timestamp')
@@ -62,19 +66,25 @@ class Friend(models.Model):
 
 class StatusMessage(models.Model):
     message = models.TextField()
-    timestamp = models.DateTimeField(default=timezone.now)
+    timestamp = models.DateTimeField(auto_now_add=True)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)  # Existing field
 
     def __str__(self):
         return f"{self.profile.first_name}: {self.message[:30]}..."
 
     def get_images(self):
-        return self.image_set.all()
+        return self.images.all()  # Updated to use 'images' related_name
+
 
 
 class Image(models.Model):
     image_file = models.ImageField(upload_to='images/')
-    status_message = models.ForeignKey(StatusMessage, on_delete=models.CASCADE)
+    status_message = models.ForeignKey(
+        StatusMessage,
+        on_delete=models.CASCADE,
+        related_name='images'  # Add this line
+    )
     timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

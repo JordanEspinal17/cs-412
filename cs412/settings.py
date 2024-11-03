@@ -78,7 +78,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'cs412.wsgi.application'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 STORAGES = {
     'default': {
@@ -103,6 +103,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+LOGIN_URL = '/mini_fb/login/'
+LOGIN_REDIRECT_URL = '/mini_fb/create_profile/'
 
 
 # Password validation

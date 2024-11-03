@@ -9,10 +9,10 @@
         <!-- Loop through all profiles -->
         {% for profile in profiles %}
             <div class="profile-card">
-                <a href="{% url 'show_profile' profile.pk %}">
+                <a href="{% url 'mini_fb:show_profile' profile.pk %}">
                     <img src="{{ profile.profile_image_url }}" alt="Profile Image" class="profile-image">
                 </a>
-                <h3><a href="{% url 'show_profile' profile.pk %}">{{ profile.first_name }} {{ profile.last_name }}</a></h3>
+                <h3><a href="{% url 'mini_fb:show_profile' profile.pk %}">{{ profile.first_name }} {{ profile.last_name }}</a></h3>
                 <p>{{ profile.city }}</p>
 
                 <!-- Status Messages -->

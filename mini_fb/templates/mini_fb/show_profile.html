@@ -9,14 +9,14 @@
 <p>Email: {{ profile.email }}</p>
 
 <!-- Add the Update Profile link -->
-<p><a href="{% url 'update_profile' profile.pk %}">Update Profile</a></p>
+<p><a href="{% url 'mini_fb:update_profile' profile.pk %}">Update Profile</a></p>
 
 <h3>Friends:</h3>
 <ul>
     {% if profile.get_friends %}
         {% for friend in profile.get_friends %}
             <li>
-                <a href="{% url 'show_profile' friend.pk %}">
+                <a href="{% url 'mini_fb:show_profile' friend.pk %}">
                     {{ friend.first_name }} {{ friend.last_name }}
                 </a>
             </li>
@@ -43,8 +43,8 @@
 
             <!-- Add update and delete links -->
             <p>
-                <a href="{% url 'update_status' status.pk %}">Update</a> |
-                <a href="{% url 'delete_status' status.pk %}">Delete</a>
+                <a href="{% url 'mini_fb:update_status' status.pk %}">Update</a> |
+                <a href="{% url 'mini_fb:delete_status' status.pk %}">Delete</a>
             </p>
         </li>
     {% empty %}
@@ -53,14 +53,14 @@
 </ul>
 
 <!-- Link to create a new status message -->
-<p><a href="{% url 'create_status' profile.pk %}">Post a Status Message</a></p>
+<p><a href="{% url 'mini_fb:create_status' profile.pk %}">Post a Status Message</a></p>
 
 <!-- Inside mini_fb/templates/mini_fb/show_profile.html -->
 
-<p><a href="{% url 'friend_suggestions' profile.pk %}">View Friend Suggestions</a></p>
+<p><a href="{% url 'mini_fb:friend_suggestions' profile.pk %}">View Friend Suggestions</a></p>
 
 <!-- mini_fb/templates/mini_fb/show_profile.html -->
 
-<p><a href="{% url 'news_feed' profile.pk %}">View News Feed</a></p>
+<p><a href="{% url 'mini_fb:news_feed' profile.pk %}">View News Feed</a></p>
 
 {% endblock %}
