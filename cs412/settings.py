@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'quotes',
     'restaurant',
     'mini_fb',
+    'voter_analytics',
 ]
 
 MIDDLEWARE = [
@@ -150,6 +151,7 @@ STATICFILES_DIRS = [
     #os.path.join(BASE_DIR, 'static'),  # Main static directory for CSS and JS
     #os.path.join(BASE_DIR, 'quotes', 'static'),  # Quotes app static files
     os.path.join(BASE_DIR, 'restaurant/static'),
+    os.path.join(BASE_DIR, 'voter_analytics/static'),
 ]
 
 # Default primary key field type
