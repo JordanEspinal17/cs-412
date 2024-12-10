@@ -15,6 +15,7 @@ python-decouple = "*"
 matplotlib = "*"
 numpy = "*"
 opencv-python-headless = "*"
+opencv-python = "*"
 
 [dev-packages]
 
