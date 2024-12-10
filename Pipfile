@@ -12,6 +12,7 @@ pillow = "*"
 plotly = "*"
 moviepy = "*"
 python-decouple = "*"
+matplotlib = "*"
 
 [dev-packages]
 
