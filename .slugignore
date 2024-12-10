@@ -1,0 +1,19 @@
+# Exclude all unnecessary project folders
+/mini_fb/
+/quotes/
+/restaurant/
+/voter_analytics/
+/tests/
+/docs/
+/scripts/
+
+# Exclude development files
+*.log
+*.md
+*.json
+*.yml
+.env
+
+# Exclude large media or backup files
+/media/
+*.sqlite3

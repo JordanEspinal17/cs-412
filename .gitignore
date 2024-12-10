@@ -5,3 +5,10 @@ settings.py
 /restaurant/
 /voter_analytics/
 
+*.pyc
+__pycache__/
+.pytest_cache/
+*.pyo
+*.pyd
+venv/
+.venv/
