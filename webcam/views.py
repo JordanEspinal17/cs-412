@@ -1,29 +1,27 @@
-from django.shortcuts import render, redirect
-from .forms import VideoUploadForm
-from moviepy.editor import VideoFileClip
-from django.core.exceptions import ValidationError
+# Standard Library Imports
+import os
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+from django.db.models import Sum
+
+# Third-Party Library Imports
 import cv2
 import mediapipe as mp
+from moviepy.editor import VideoFileClip
 import openai
+
+# Django Imports
 from django.conf import settings
-from .models import UploadedVideo
-import os
-import numpy as np
-from django.contrib.auth import login
-from .forms import UserRegisterForm
-from .models import Profile
-from django.contrib.auth.decorators import login_required
-from django.views.generic import FormView
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from .models import CoachFeedback
-import matplotlib.pyplot as plt
-from django.contrib.auth import logout
-from .models import Ranking
-from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
-from .models import ChatMessage, Profile
-import random
+from django.contrib.auth import login
+from django.views.generic import FormView
+
+# Local Application Imports
+from .forms import VideoUploadForm, UserRegisterForm
+from .models import UploadedVideo, Profile, CoachFeedback, Ranking, ChatMessage
 from .utils import check_and_award_achievements
 
 
