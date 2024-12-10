@@ -1,21 +1,9 @@
 # Exclude all unnecessary project folders
 
-/tests/
-/docs/
-/scripts/
-
-# Exclude development files
-*.log
-*.md
-*.json
-*.yml
-.env
-
 # Exclude large media or backup files
-/media/
 *.sqlite3
 /staticfiles/
 
 *.pyc
 __pycache__/
-
+/media/
