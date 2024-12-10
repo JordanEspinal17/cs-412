@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'quotes',
-    'restaurant',
-    'mini_fb',
-    'voter_analytics',
+    #'quotes',
+    #'restaurant',
+    #'mini_fb',
+    #'voter_analytics',
     'webcam',
 ]
 
