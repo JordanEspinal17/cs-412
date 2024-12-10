@@ -14,8 +14,8 @@ moviepy = "*"
 python-decouple = "*"
 matplotlib = "*"
 numpy = "*"
-opencv-python-headless = "*"
 mediapipe = "*"
+opencv-python = "*"
 
 [dev-packages]
 
