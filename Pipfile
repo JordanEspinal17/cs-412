@@ -16,6 +16,7 @@ matplotlib = "*"
 numpy = "*"
 opencv-python-headless = "*"
 opencv-python = "*"
+mediapipe = "*"
 
 [dev-packages]
 
