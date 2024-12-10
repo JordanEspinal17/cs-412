@@ -1,0 +1,34 @@
+{% extends "webcam/base.html" %}
+
+{% block title %}
+Analysis Results
+{% endblock %}
+
+{% block content %}
+<h2>Analysis Results</h2>
+<p>Average Similarity: {{ comparison_results.average_similarity }}</p>
+<p>Skipped Client Frames: {{ comparison_results.skipped_client_frames }}</p>
+<p>Skipped Reference Frames: {{ comparison_results.skipped_reference_frames }}</p>
+
+<div class="graph-container">
+    <h3>Frame-by-Frame Similarity Scores:</h3>
+    <img src="{{ graph_path }}" alt="Similarity Graph" class="graph-image">
+</div>
+
+
+<div class="feedback-container">    
+    <p>{{ feedback.introduction }}</p>
+
+    <ul>
+        {% for point in feedback.areas_of_improvement %}
+        <li>{{ point }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>{{ feedback.conclusion }}</p>
+</div>
+
+
+
+
+{% endblock %}

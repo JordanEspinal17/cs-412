@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>Dance Routine Generator</title>
+    <link rel="stylesheet" href="{% static 'webcam/webcam.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'webcam/base' %}">Home</a></li>
+            <li><a href="{% url 'global_leaderboard' %}">Leaderboard</a></li>
+            <li><a href="{% url 'dance_routine' %}">Generate Dance Routine</a></li>
+            <li><a href="{% url 'profile_page' %}">Profile</a></li>
+        </ul>
+    </nav>
+
+    <div class="centered-container">
+        <h1>Dance Routine Generator</h1>
+        <h2>Song: {{ song }}</h2>
+        <h3>Theme: {{ theme }}</h3>
+
+        <div class="choreography">
+            <h3>Choreography:</h3>
+            <div class="choreography-section">
+                {% for section, steps in choreography.items %}
+                <h4>{{ section }}</h4>
+                <ul>
+                    {% for step in steps %}
+                    <li>{{ step }}</li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+
+        <form method="GET" action="{% url 'dance_routine' %}">
+            <button type="submit">Generate Another Routine</button>
+        </form>
+        <p><a href="{% url 'webcam/base' %}">Back to Home</a></p>
+    </div>
+</body>
+
+</html>

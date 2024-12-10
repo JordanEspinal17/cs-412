@@ -1,0 +1,27 @@
+{% extends "webcam/base.html" %}
+
+{% block title %}
+Profile - {{ profile.user.username }}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome, {{ profile.user.username }}!</h1>
+    <img src="{{ profile.avatar.url }}" alt="Avatar" 
+    style="width: 50%; height: 50%; border-radius: 50%; display: block; margin: 0 auto;">
+   <p><strong>Bio:</strong> {{ profile.bio }}</p>
+    <p><strong>Videos Uploaded:</strong> {{ profile.videos_uploaded }}</p>
+
+    <h3>Achievements:</h3>
+    <ul>
+        {% for achievement in achievements %}
+        <li>
+            <img src="{{ achievement.badge.url }}" alt="{{ achievement.name }}" style="width: 50px; height: 50px;">
+            <strong>{{ achievement.name }}</strong>: {{ achievement.description }}
+        </li>
+        {% empty %}
+        <p>No achievements yet. Start earning now!</p>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

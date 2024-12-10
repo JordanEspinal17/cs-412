@@ -1,11 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webcam Test</title>
+    {% load static %}
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'webcam/webcam.css' %}">
 </head>
 <body>
-    <h1>Testing home page</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'webcam/base' %}">Home</a></li>
+            <li><a href="{% url 'global_leaderboard' %}">Leaderboard</a></li>
+            <li><a href="{% url 'dance_routine' %}">Generate Dance Routine</a></li>
+            <li><a href="{% url 'profile_page' %}">Profile</a></li>
+        </ul>
+    </nav>
+    
+
+    <div class="content">
+        {% block content %}
+
+    {% if user.is_authenticated %}
+    <h2>Welcome to StarSync, {{ request.user.username }}!</h2>
+        <h4 style="text-align: center;">Have you ever needed to get feedback on your dance skills and your choreograpgher cannot be reached? StarSync is able to give you feedback on any dance video you want!</h4>
+        <h4 style="text-align: center;"> Please go over to Upload Video to get all the feedback you desire!</h4> 
+
+        <div class="button-container">
+            <a class="button" href="{% url 'upload_video' %}">Upload Video</a>
+        </div>
+        
+            <form class="button" method="post" action="{% url 'logout_success' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}">Login</a> or 
+            <a href="{% url 'register' %}">Register</a>
+        </p>
+    {% endif %}
+        {% endblock %}
+    </div>
 </body>
 </html>

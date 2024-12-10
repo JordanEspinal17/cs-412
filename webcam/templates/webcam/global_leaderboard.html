@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>Global Leaderboard</title>
+    <link rel="stylesheet" href="{% static 'webcam/webcam.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'webcam/base' %}">Home</a></li>
+            <li><a href="{% url 'global_leaderboard' %}">Leaderboard</a></li>
+            <li><a href="{% url 'dance_routine' %}">Generate Dance Routine</a></li>
+            <li><a href="{% url 'profile_page' %}">Profile</a></li>
+        </ul>
+    </nav>
+    <h1>Global Leaderboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Username</th>
+                <th>Total Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in leaderboard %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ entry.username }}</td>
+                <td>{{ entry.total_score|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Public Chat Room</h2>
+    <div id="chat-room">
+        <div id="messages">
+            {% for message in chat_messages %}
+            <p><strong>{{ message.user.username }}</strong>: {{ message.message }}</p>
+            {% endfor %}
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <textarea name="message" placeholder="Type your message..." required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <p><a href="{% url 'webcam/base' %}">Back to Home</a></p>
+</body>
+</html>

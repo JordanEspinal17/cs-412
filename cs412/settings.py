@@ -12,7 +12,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os # operating system library
+from decouple import config
 
+OPENAI_API_KEY = config('OPENAI_API_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -106,8 +108,11 @@ DATABASES = {
     }
 }
 
-LOGIN_URL = '/mini_fb/login/'
-LOGIN_REDIRECT_URL = '/mini_fb/create_profile/'
+LOGIN_URL = '/webcam/login/'
+LOGIN_REDIRECT_URL = '/webcam/'  # Redirect to webcam home page after login
+LOGOUT_REDIRECT_URL = '/webcam/login/'  # Redirect to login page after logout
+
+
 
 
 # Password validation
@@ -153,6 +158,7 @@ STATICFILES_DIRS = [
     #os.path.join(BASE_DIR, 'quotes', 'static'),  # Quotes app static files
     os.path.join(BASE_DIR, 'restaurant/static'),
     os.path.join(BASE_DIR, 'voter_analytics/static'),
+    os.path.join(BASE_DIR, 'webcam/static'),
 ]
 
 # Default primary key field type

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>Upload Videos</title>
+    <link rel="stylesheet" href="{% static 'webcam/webcam.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'webcam/base' %}">Home</a></li>
+            <li><a href="{% url 'global_leaderboard' %}">Leaderboard</a></li>
+            <li><a href="{% url 'dance_routine' %}">Generate Dance Routine</a></li>
+            <li><a href="{% url 'profile_page' %}">Profile</a></li>
+        </ul>
+    </nav>
+    <h1>Upload Your Videos</h1>
+    <h4 style="text-align: center;">Videos have to be less then 60 seconds to be anaylzed.</h4>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>
