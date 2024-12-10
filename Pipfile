@@ -13,6 +13,8 @@ plotly = "*"
 moviepy = "*"
 python-decouple = "*"
 matplotlib = "*"
+opencv-python = "*"
+numpy = "*"
 
 [dev-packages]
 
