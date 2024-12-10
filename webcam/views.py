@@ -8,7 +8,6 @@ from django.db.models import Sum
 # Third-Party Library Imports
 import cv2
 import mediapipe as mp
-from moviepy.editor import VideoFileClip
 import openai
 
 # Django Imports
