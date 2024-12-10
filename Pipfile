@@ -11,6 +11,7 @@ whitenoise = "*"
 pillow = "*"
 plotly = "*"
 moviepy = "*"
+python-decouple = "*"
 
 [dev-packages]
 

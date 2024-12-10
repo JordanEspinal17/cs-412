@@ -17,3 +17,8 @@
 # Exclude large media or backup files
 /media/
 *.sqlite3
+/staticfiles/
+
+*.pyc
+__pycache__/
+
