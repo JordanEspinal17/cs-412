@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quotes App</title>
+<!-- In your base.html or main template -->
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Quotes App</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'show_all_quotes' %}">Show All</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- In your Django template, for example, quotes.html -->
+{% for image in images %}
+<img src="{% static quote.image %}" alt="Kendrick Lamar" style="max-width: 100%; height: auto;">
+{% endfor %}
+
+        {% endblock content %}
+    </main>
+
+    <footer>
+        &copy; 2024 Quotes App
+    </footer>
+</body>
+</html>

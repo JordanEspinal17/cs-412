@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Facebook</title>
+    {% load static %}
+    <!-- Link to the CSS file -->
+    <link rel="stylesheet" href="{% static 'mini_fb/mini_fb_styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Mini Facebook</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'mini_fb:show_all_profiles' %}">All Profiles</a></li>
+
+                {% if user.is_authenticated %}
+                    <li>Welcome, {{ user.username }}!</li>
+                    {% if user.profile %}
+                    <li><a href="{% url 'mini_fb:show_profile' user.profile.id %}">My Profile</a></li>
+
+                    {% else %}
+                    <li><a href="{% url 'mini_fb:register' %}">Register</a></li>
+                    <li><a href="{% url 'mini_fb:login' %}">Login</a></li>
+
+                        <li><form method="post" action="{% url 'mini_fb:logged_out' %}">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form></li>
+                    
+                    {% endif %}
+                    
+
+
+                {% else %}
+                    <li><a href="{% url 'mini_fb:login' %}">Login</a></li>
+
+
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mini Facebook</p>
+    </footer>
+</body>
+</html>

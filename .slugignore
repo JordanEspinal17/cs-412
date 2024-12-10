@@ -1,8 +1,5 @@
 # Exclude all unnecessary project folders
-/mini_fb/
-/quotes/
-/restaurant/
-/voter_analytics/
+
 /tests/
 /docs/
 /scripts/

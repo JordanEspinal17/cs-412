@@ -1,9 +1,6 @@
 .env
 settings.py
-/mini_fb/
-/quotes/
-/restaurant/
-/voter_analytics/
+
 
 *.pyc
 __pycache__/

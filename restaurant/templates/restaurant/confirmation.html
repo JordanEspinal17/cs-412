@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmation - Restaurant App</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Order Confirmation</h1>
+    </header>
+
+    <main>
+        <section id="confirmation-details">
+            <h2>Thank you for your order, {{ customer_name }}!</h2>
+            <p>Your order has been placed successfully.</p>
+            
+            <h3>Order Details</h3>
+            <ul>
+                {% for item in ordered_items %}
+                <li>{{ item.name }} - ${{ item.price }}{% if item.quantity %} (Quantity: {{ item.quantity }}){% endif %}</li>
+                {% endfor %}
+            </ul>
+            
+            <h3>Total Price: ${{ total_price }}</h3>
+            
+            <h3>Customer Information</h3>
+            <p><strong>Phone:</strong> {{ customer_phone }}</p>
+            <p><strong>Email:</strong> {{ customer_email }}</p>
+            
+            <h3>Special Instructions</h3>
+            <p>{{ special_instructions }}</p>
+            
+            <h3>Estimated Ready Time</h3>
+            <p>Your order will be ready at approximately {{ ready_time }}.</p>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024 Restaurant App
+    </footer>
+</body>
+</html>

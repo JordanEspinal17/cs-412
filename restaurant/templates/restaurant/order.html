@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Food - Restaurant App</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Order Food</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'main' %}">Home</a></li>
+                <li><a href="{% url 'order' %}">Order</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="order-form">
+            <h2>Place Your Order</h2>
+            <form action="{% url 'confirmation' %}" method="post">
+                {% csrf_token %}
+                
+                <h3>Menu Items</h3>
+                <!-- Bistec Encebollado -->
+                <div>
+                    <input type="checkbox" id="bistec" name="items" value="Bistec Encebollado">
+                    <label for="bistec">Bistec Encebollado - $12.99</label>
+                    <div>
+                        <label for="bistec-quantity">Quantity:</label>
+                        <input type="number" id="bistec-quantity" name="bistec-encebollado-quantity" min="1" value="1">
+                    </div>
+                </div>
+                
+                <!-- Empanadas -->
+                <div>
+                    <input type="checkbox" id="empanada" name="items" value="Empanadas">
+                    <label for="empanada">Empanadas - $3.00 each</label>
+                    <div>
+                        <label for="empanada-filling">Choose your filling:</label>
+                        <select id="empanada-filling" name="empanada-filling">
+                            <option value="chicken">Chicken</option>
+                            <option value="beef">Beef</option>
+                            <option value="turkey">Turkey</option>
+                            <option value="cheese">Cheese</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="empanada-quantity">Quantity:</label>
+                        <input type="number" id="empanada-quantity" name="empanadas-quantity" min="1" value="1">
+                    </div>
+                </div>
+                
+                <!-- Pernil con Arroz -->
+                <div>
+                    <input type="checkbox" id="pernil" name="items" value="Pernil con Arroz">
+                    <label for="pernil">Pernil con Arroz - $10.99</label>
+                    <div>
+                        <label for="pernil-quantity">Quantity:</label>
+                        <input type="number" id="pernil-quantity" name="pernil-con-arroz-quantity" min="1" value="1">
+                    </div>
+                </div>
+                
+                <!-- Daily Special -->
+                <div>
+                    <input type="checkbox" id="daily-special" name="items" value="Daily Special">
+                    <label for="daily-special">{{ daily_special.name }} - ${{ daily_special.price }}</label>
+                    <p>{{ daily_special.description }}</p>
+                    <div>
+                        <label for="daily-special-quantity">Quantity:</label>
+                        <input type="number" id="daily-special-quantity" name="daily-special-quantity" min="1" value="1">
+                    </div>
+                </div>
+                
+                <!-- Special Instructions -->
+                <h3>Special Instructions</h3>
+                <textarea name="instructions" rows="4" cols="50" placeholder="Any special instructions..."></textarea>
+
+                <!-- Customer Information -->
+                <h3>Customer Information</h3>
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit">Submit Order</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2024 Restaurant App
+    </footer>
+</body>
+</html>
