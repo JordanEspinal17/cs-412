@@ -16,6 +16,12 @@ urlpatterns = [
     path('leaderboard/', views.global_leaderboard, name='global_leaderboard'),
     path('dance_routine/', views.generate_dance_routine, name='dance_routine'),
     path('profile/', profile_page, name='profile_page'),
+    path('message/update/<int:message_id>/', views.update_message, name='update_message'),
+    path('profile/update/', views.update_profile, name='update_profile'),
+    path('reset_all_scores/', views.reset_all_scores, name='reset_all_scores'),
+    path('delete_all_scores/', views.delete_all_scores, name='delete_all_scores'),
+    path('delete_message/<int:message_id>/', views.delete_message, name='delete_message'),
+
 
 ]
 

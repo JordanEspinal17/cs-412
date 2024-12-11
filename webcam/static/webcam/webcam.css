@@ -160,21 +160,38 @@ form button:hover {
 
 
 button, a.button {
-    display: inline-block;      /* Allows the button to be treated as an inline element */
-    padding: 10px 20px;         /* Adjusts padding for a better appearance */
-    background-color: #007BFF; /* Primary button color */
-    color: white;               /* Text color */
-    border: none;               /* Removes border */
-    border-radius: 5px;         /* Rounds the corners */
-    text-align: center;         /* Centers text inside the button */
-    text-decoration: none;      /* Removes underline from links */
-    font-size: 1em;             /* Sets a readable font size */
-    cursor: pointer;            /* Changes the cursor to a pointer on hover */
+    display: inline-block; /* Ensures buttons behave like inline elements */
+    padding: 5px 10px;     /* Adjust padding as needed */
+    background-color: #007BFF; /* Button background */
+    color: white;           /* Text color */
+    border: none;           /* No borders */
+    border-radius: 5px;     /* Rounded corners */
+    text-align: center;     /* Center text */
+    text-decoration: none;  /* No underline for links */
+    font-size: 1em;         /* Font size */
+    cursor: pointer;        /* Pointer on hover */
     transition: background-color 0.3s ease; /* Smooth hover effect */
+    width: auto;            /* Ensure the width is just enough for text */
 }
 
 button:hover, a.button:hover {
-    background-color: #0056b3;  /* Darker hover effect */
+    background-color: #0056b3; /* Darker hover color */
+}
+
+.delete-link {
+    background: none;       /* No background */
+    border: none;           /* No border */
+    color: blue;            /* Link color */
+    text-decoration: underline; /* Underlined text */
+    cursor: pointer;        /* Pointer on hover */
+    padding: 0;             /* No padding */
+    font: inherit;          /* Match surrounding text */
+    width: auto;            /* Ensure width is just enough for text */
+}
+
+.delete-link:hover {
+    color: darkblue; /* Optional hover color */
+    text-decoration: none; /* Remove underline on hover */
 }
 
 /* Chat Room */

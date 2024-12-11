@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>{% block title %}Update Profile {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'webcam/webcam.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Update Profile</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Update</button>
+            </form>
+    </div>
+</body>
+</html>

@@ -1,5 +1,5 @@
 from django import forms
-from .models import UploadedVideo
+from .models import UploadedVideo, ChatMessage, Profile
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -13,9 +13,18 @@ class UserRegisterForm(UserCreationForm):
         fields = [
             'username', 'email', 'first_name', 'last_name', 'password1', 'password2'
         ]
-
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'avatar']
 
 class VideoUploadForm(forms.ModelForm):
     class Meta:
         model = UploadedVideo
-        fields = ('client_video', 'reference_video')
+        fields = ('reference_video', 'client_video')
+
+
+class ChatMessageForm(forms.ModelForm):
+    class Meta:
+        model = ChatMessage
+        fields = ['message']

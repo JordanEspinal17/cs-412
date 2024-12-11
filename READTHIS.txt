@@ -1,0 +1,13 @@
+Hello Instructors,
+
+I wanted to provide additional context regarding why my project is not launching on Heroku. As mentioned in my previous Piazza posts (@335 and @338), the core functionality of my project relies on OpenCV for video manipulation and analysis. While this works correctly on my local machine, I encountered a critical issue when deploying to Heroku: the platform does not fully support the standard OpenCV library, only the smaller opencv-python-headless variant. Unfortunately, this variant lacks some of the functionalities I need for my project’s core features.
+
+Despite spending several days researching and attempting to resolve this issue, I found no viable workaround to get the full OpenCV library running on Heroku. Numerous online discussions suggest that this has been a longstanding limitation with no clear solution.
+
+I understand that you may need to grade the project as deployed on Heroku. If this limitation affects my score, I understand. However, I wanted to make you aware of the technical constraints I faced. Should you wish to test the program locally, please note that it only accepts videos under 60 seconds in length to ensure timely analysis.
+
+Thank you for your understanding and for a wonderful semester. I hope you have a great break.
+
+Best regards,
+Jordan Espinal
+

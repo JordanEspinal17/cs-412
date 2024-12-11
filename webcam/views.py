@@ -13,18 +13,21 @@ import openai
 # Django Imports
 from django.conf import settings
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.views.generic import FormView
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseForbidden
+from django.http import HttpResponseRedirect
+from django.contrib import messages
+
+
 
 # Local Application Imports
-from .forms import VideoUploadForm, UserRegisterForm
-from .models import UploadedVideo, Profile, CoachFeedback, Ranking, ChatMessage
+from .forms import VideoUploadForm, UserRegisterForm, ChatMessageForm, ProfileUpdateForm
+from .models import UploadedVideo, Profile, CoachFeedback, Ranking, ChatMessage  
 from .utils import check_and_award_achievements
-
-
-
 
 class UserRegisterView(FormView):
     template_name = 'webcam/register.html'  # Update path to match new location
@@ -260,13 +263,14 @@ def generate_feedback(comparison_results):
 
     return feedback, f'{settings.MEDIA_URL}{graph_filename}'
 
-
+# Logout function
 def logout_success(request):
     return redirect('login') 
 
+# Leaderboard function to display all points
 @login_required
 def global_leaderboard(request):
-    # Fetch leaderboard data
+    # Fetch leaderboard data: one score per user
     leaderboard = (
         Ranking.objects.values('username')
         .annotate(total_score=Sum('score'))
@@ -287,6 +291,43 @@ def global_leaderboard(request):
         'chat_messages': chat_messages,
     })
 
+@login_required
+def reset_all_scores(request):
+    if request.method == 'POST':
+        Ranking.objects.update(score=0)  # Reset all scores to 0
+    return HttpResponseRedirect(reverse('global_leaderboard'))
+
+@login_required
+def delete_all_scores(request):
+    if request.method == 'POST':
+        Ranking.objects.all().delete()  # Delete all scores
+    return HttpResponseRedirect(reverse('global_leaderboard'))
+
+# Global chat
+@login_required
+def update_message(request, message_id):
+    message = get_object_or_404(ChatMessage, id=message_id, user=request.user)
+    if request.method == 'POST':
+        form = ChatMessageForm(request.POST, instance=message)
+        if form.is_valid():
+            form.save()
+            return redirect('global_leaderboard')
+    else:
+        form = ChatMessageForm(instance=message)
+
+    return render(request, 'webcam/update_message.html', {'form': form})
+
+@login_required
+def delete_message(request, message_id):
+    message = get_object_or_404(ChatMessage, id=message_id, user=request.user)
+
+    if request.method == 'POST':
+        message.delete()
+        messages.success(request, "Message deleted successfully.")
+        return redirect('global_leaderboard')  # Redirect back to the leaderboard
+
+    # Render a confirmation page (if needed)
+    return render(request, 'webcam/confirm_delete.html', {'message': message})
 # Predefined songs and themes
 SONGS = [
     "Shape of You - Ed Sheeran",
@@ -304,7 +345,7 @@ THEMES = [
     "Salsa",
     "Breakdance"
 ]
-
+# will generate choreo for client and be returned
 def parse_choreography(choreography_text):
     sections = {}
     current_section = None
@@ -351,3 +392,15 @@ def profile_page(request):
         'achievements': profile.achievements.all(),
     })
 
+@login_required
+def update_profile(request):
+    profile = request.user.webcam_profile  # Access the related Profile
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('profile_page')
+    else:
+        form = ProfileUpdateForm(instance=profile)
+
+    return render(request, 'webcam/update_profile.html', {'form': form})

@@ -23,5 +23,7 @@ Profile - {{ profile.user.username }}
         <p>No achievements yet. Start earning now!</p>
         {% endfor %}
     </ul>
+    <a href="{% url 'update_profile' %}">Edit Profile</a>
+
 </div>
 {% endblock %}

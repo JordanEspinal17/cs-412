@@ -6,9 +6,10 @@ Analysis Results
 
 {% block content %}
 <h2>Analysis Results</h2>
-<p>Average Similarity: {{ comparison_results.average_similarity }}</p>
-<p>Skipped Client Frames: {{ comparison_results.skipped_client_frames }}</p>
-<p>Skipped Reference Frames: {{ comparison_results.skipped_reference_frames }}</p>
+<div style="text-align: center;"><p>Average Similarity: {{ comparison_results.average_similarity }}</p>
+    <p>Skipped Client Frames: {{ comparison_results.skipped_client_frames }}</p>
+    <p>Skipped Reference Frames: {{ comparison_results.skipped_reference_frames }}</p></div>
+
 
 <div class="graph-container">
     <h3>Frame-by-Frame Similarity Scores:</h3>
